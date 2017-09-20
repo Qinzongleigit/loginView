@@ -8,7 +8,21 @@
 
 #import "ViewController.h"
 
+
+
 @interface ViewController ()
+
+{
+    
+    UIButton*button;
+}
+
+
+@property (nonatomic,strong) UITextField*userNameTextField;
+@property (nonatomic,strong) UITextField*passWorldTextField;
+
+
+
 
 @end
 
@@ -17,8 +31,87 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    
+    [self creatUI];
+    
 }
 
+-(void)creatUI{
+    
+    _userNameTextField=[[UITextField alloc] initWithFrame:CGRectMake(100, 100, 200, 30)];
+    _userNameTextField.text=@"用户名字";
+    _userNameTextField.textColor=[UIColor redColor];
+    _userNameTextField.placeholder=@"请输入账号";
+    _userNameTextField.borderStyle=UITextBorderStyleRoundedRect;
+    _userNameTextField.returnKeyType=UIReturnKeyGo;
+    _userNameTextField.clearButtonMode=UITextFieldViewModeWhileEditing;
+    [self.view addSubview:_userNameTextField];
+    
+    
+    
+    _passWorldTextField=[[UITextField alloc] initWithFrame:CGRectMake(100, CGRectGetMaxY(_userNameTextField.frame)+30, 200, 30)];
+    _passWorldTextField.placeholder=@"请输入密码";
+    _passWorldTextField.borderStyle=UITextBorderStyleRoundedRect;
+    _passWorldTextField.returnKeyType=UIReturnKeyGo;
+     _passWorldTextField.clearButtonMode=UITextFieldViewModeWhileEditing;
+    [self.view addSubview:_passWorldTextField];
+    
+    
+    
+    [self addButtonWithFrame:CGRectMake(150, CGRectGetMaxY(_passWorldTextField.frame)+30, 100, 40) Title:@"登录" Tag:100];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)keyBoardWillShow{
+
+    button.frame=CGRectMake(150, CGRectGetMaxY(_passWorldTextField.frame)+10, 100, 40);
+}
+
+-(void)keyBoardWillHide{
+    
+    button.frame=CGRectMake(150, CGRectGetMaxY(_passWorldTextField.frame)+30, 100, 40);
+    
+    
+}
+
+
+-(void)addButtonWithFrame:(CGRect)frame
+                    Title:(NSString*)title
+                    Tag:(NSInteger)tag{
+    
+    button=[UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame=frame;
+    button.tag=tag;
+    button.backgroundColor=[UIColor grayColor];
+    button.layer.cornerRadius=10;
+    [button setTitle:title forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
+    
+}
+
+
+-(void)buttonClick:(UIButton*)bt{
+    
+    if ([_userNameTextField.text isEqualToString:@"Admin"]&&[_passWorldTextField.text isEqualToString:@"123"]) {
+        
+        UIAlertView*alert=[[UIAlertView alloc ]initWithTitle:@"登录成功" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alert show];
+       
+    }
+    
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    
+    [self.view endEditing:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
