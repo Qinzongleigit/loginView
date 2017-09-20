@@ -15,6 +15,8 @@
 {
     
     UIButton*button;
+    
+    UIView*view1;
 }
 
 
@@ -39,6 +41,10 @@
 
 -(void)creatUI{
     
+   view1=[[UIView alloc] initWithFrame:CGRectMake(0, 100, 320, 400)];
+    view1.backgroundColor=[UIColor whiteColor];
+    [self.view addSubview:view1];
+    
     _userNameTextField=[[UITextField alloc] initWithFrame:CGRectMake(100, 100, 200, 30)];
     _userNameTextField.text=@"用户名字";
     _userNameTextField.textColor=[UIColor redColor];
@@ -46,7 +52,7 @@
     _userNameTextField.borderStyle=UITextBorderStyleRoundedRect;
     _userNameTextField.returnKeyType=UIReturnKeyGo;
     _userNameTextField.clearButtonMode=UITextFieldViewModeWhileEditing;
-    [self.view addSubview:_userNameTextField];
+    [view1 addSubview:_userNameTextField];
     
     
     
@@ -55,7 +61,7 @@
     _passWorldTextField.borderStyle=UITextBorderStyleRoundedRect;
     _passWorldTextField.returnKeyType=UIReturnKeyGo;
      _passWorldTextField.clearButtonMode=UITextFieldViewModeWhileEditing;
-    [self.view addSubview:_passWorldTextField];
+    [view1 addSubview:_passWorldTextField];
     
     
     
@@ -68,12 +74,17 @@
 
 -(void)keyBoardWillShow{
 
-    button.frame=CGRectMake(150, CGRectGetMaxY(_passWorldTextField.frame)+10, 100, 40);
+
+    view1.frame= CGRectMake(0, 50, 320, 400);
+    
+
+    //button.frame=CGRectMake(150, CGRectGetMaxY(_passWorldTextField.frame)+10, 100, 40);
 }
 
 -(void)keyBoardWillHide{
     
-    button.frame=CGRectMake(150, CGRectGetMaxY(_passWorldTextField.frame)+30, 100, 40);
+    //button.frame=CGRectMake(150, CGRectGetMaxY(_passWorldTextField.frame)+30, 100, 40);
+    view1.frame=CGRectMake(0, 100, 320, 400);
     
     
 }
@@ -90,7 +101,7 @@
     button.layer.cornerRadius=10;
     [button setTitle:title forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
+    [view1 addSubview:button];
     
     
 }
