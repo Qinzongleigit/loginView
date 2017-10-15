@@ -32,7 +32,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
     
     [self creatUI];
@@ -42,7 +41,7 @@
 -(void)creatUI{
     
    view1=[[UIView alloc] initWithFrame:CGRectMake(0, 100, 320, 400)];
-    view1.backgroundColor=[UIColor whiteColor];
+    view1.backgroundColor=[UIColor grayColor];
     [self.view addSubview:view1];
     
     _userNameTextField=[[UITextField alloc] initWithFrame:CGRectMake(100, 100, 200, 30)];
